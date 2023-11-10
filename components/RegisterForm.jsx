@@ -8,6 +8,7 @@ export default function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user");
   const [error, setError] = useState("");
 
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !role) {
       setError("All fields are necessary.");
       return;
     }
@@ -31,6 +32,8 @@ export default function RegisterForm() {
 
       const { user } = await resUserExists.json();
 
+      console.log(user);
+
       if (user) {
         setError("User already exists.");
         return;
@@ -45,6 +48,7 @@ export default function RegisterForm() {
           name,
           email,
           password,
+          role,
         }),
       });
 
@@ -81,6 +85,10 @@ export default function RegisterForm() {
             type="password"
             placeholder="Password"
           />
+          <select value={role} onChange={(e) => setRole(e.target.value)}>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
           <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">
             Register
           </button>

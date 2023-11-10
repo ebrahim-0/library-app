@@ -13,6 +13,8 @@ export const authOptions = {
       async authorize(credentials) {
         const { email, password } = credentials;
 
+        console.log("credentials", credentials);
+
         try {
           await connectMongoDB();
           const user = await User.findOne({ email });
@@ -34,6 +36,21 @@ export const authOptions = {
       },
     }),
   ],
+
+  callbacks: {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === "update") {
+        return { ...token, ...session.user };
+      }
+      return { ...token, ...user };
+    },
+
+    async session({ session, token }) {
+      session.user = token;
+      return session;
+    },
+  },
+
   session: {
     strategy: "jwt",
   },

@@ -13,8 +13,6 @@ export const authOptions = {
       async authorize(credentials) {
         const { email, password } = credentials;
 
-        console.log("credentials", credentials);
-
         try {
           await connectMongoDB();
           const user = await User.findOne({ email });

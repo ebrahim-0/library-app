@@ -1,15 +1,11 @@
-import LoginForm from "@/components/LoginForm";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-export default async function Home() {
-  const session = await getServerSession(authOptions);
+import About from "@/components/About";
+import Hero from "@/components/Hero";
 
-  if (session) redirect("/dashboard");
-
+export default function page() {
   return (
     <main>
-      <LoginForm />
+      <Hero />
+      <About />
     </main>
   );
 }

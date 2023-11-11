@@ -19,7 +19,7 @@ export default function Hero() {
         <span>To</span>
         <span>Our Library</span>
 
-        <Link href="login" className="bg-white text-black px-7 py-2 rounded-lg">
+        <Link href="login" className="bg-white text-black px-4 sm:px-7 py-2 rounded-lg">
           Get Started
         </Link>
       </div>

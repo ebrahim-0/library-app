@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import About from "@/components/About";
 import Hero from "@/components/Hero";
@@ -6,14 +6,13 @@ import Products from "@/components/Products";
 import { useState } from "react";
 
 export default function Home() {
-  
-const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null);
   return (
     <main>
       <Hero />
       <About />
       <Products />
-        <div>
+      <div>
         <form>
           <input
             type="file"
@@ -28,7 +27,6 @@ const [file, setFile] = useState(null);
 
         <img src={file} alt="" />
       </div>
-      
-     </main>
+    </main>
   );
 }

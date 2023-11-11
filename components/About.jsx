@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 export default function About() {
   return (
     <section className="container w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 p-8 my-14">

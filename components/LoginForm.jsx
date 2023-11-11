@@ -23,7 +23,6 @@ export default function LoginForm() {
       });
 
       if (res.error) {
-
         setError("Invalid Email or Password");
         return;
       }

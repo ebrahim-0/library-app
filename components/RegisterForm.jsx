@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function RegisterForm() {
   const [name, setName] = useState("");
@@ -32,8 +33,6 @@ export default function RegisterForm() {
 
       const { user } = await resUserExists.json();
 
-      console.log(user);
-
       if (user) {
         setError("User already exists.");
         return;
@@ -51,8 +50,13 @@ export default function RegisterForm() {
           role,
         }),
       });
-
       if (res.ok) {
+        await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+
         const form = e.target;
         form.reset();
         router.push("/");
@@ -72,7 +76,7 @@ export default function RegisterForm() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             onChange={(e) => setName(e.target.value)}
-            type="text" 
+            type="text"
             placeholder="Full Name"
           />
           <input

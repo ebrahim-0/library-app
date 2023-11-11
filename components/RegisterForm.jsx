@@ -66,13 +66,13 @@ export default function RegisterForm() {
 
   return (
     <div className="grid place-items-center h-screen">
-      <div className="shadow-lg p-5 rounded-lg border-t-4 border-[#007bb6]">
+      <div className="shadow-lg p-5 rounded-lg border-t-4 border-[#007bb6] w-[320px] sm:w-[450px]">
         <h1 className="text-xl font-bold my-4">Register</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             onChange={(e) => setName(e.target.value)}
-            type="text"
+            type="text" 
             placeholder="Full Name"
           />
           <input

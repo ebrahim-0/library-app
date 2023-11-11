@@ -61,7 +61,7 @@ export default function NavBar() {
         )}
       </div>
       <div className="sm:hidden flex relative">
-        {session?.user ? (
+        {(
           <div className="flex">
             <FaBars
               className="text-3xl text-white"
@@ -86,16 +86,16 @@ export default function NavBar() {
                 >
                   Dashboard
                 </Link>
-                <button
+                {session&&(<button
                   type="button"
-                  className="red_btn w-full mt-5"
+                  className="red_btn w-full"
                   onClick={() => {
                     signOut();
                     setToggleDropdown(false);
                   }}
                 >
                   Sing Out
-                </button>
+                </button>)}
                 {!session && (
                   <>
                     <Link
@@ -118,25 +118,7 @@ export default function NavBar() {
               </div>
             )}
           </div>
-        ) : (
-          <>
-            <Link
-              href="/login"
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              Login
-            </Link>
-
-            <Link
-              href="/register"
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              Register
-            </Link>
-          </>
-        )}
+        ) }
       </div>
     </nav>
   );

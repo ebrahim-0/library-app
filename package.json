@@ -9,17 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-cloud/storage": "^7.6.0",
     "autoprefixer": "10.4.14",
     "bcryptjs": "^2.4.3",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "googleapis": "^128.0.0",
     "mongoose": "^7.4.1",
+    "multer": "^1.4.5-lts.1",
     "next": "13.4.12",
     "next-auth": "^4.22.3",
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
+    "react-pdf": "^7.5.1",
     "tailwindcss": "3.3.3"
   }
 }

@@ -66,7 +66,7 @@ export default function RegisterForm() {
 
   return (
     <div className="grid place-items-center h-screen">
-      <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
+      <div className="shadow-lg p-5 rounded-lg border-t-4 border-[#007bb6]">
         <h1 className="text-xl font-bold my-4">Register</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -89,7 +89,7 @@ export default function RegisterForm() {
             <option value="admin">Admin</option>
             <option value="user">User</option>
           </select>
-          <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">
+          <button className="bg-[#007bb6] text-white font-bold cursor-pointer px-6 py-2">
             Register
           </button>
 

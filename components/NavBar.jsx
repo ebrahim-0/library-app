@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useSession } from "next-auth/react";
@@ -13,7 +14,11 @@ export default function NavBar() {
           href="/"
           className={`text-white px-3 py-2 rounded-md text-xl font-medium transition-all duration-300 cursor-pointer`}
         >
-        <img src="/logo.png" alt="logo" className="w-10 h-10 inline-block mr-2" />
+          <img
+            src="/logo.png"
+            alt="logo"
+            className="w-10 h-10 inline-block mr-2"
+          />
           Library App
         </Link>
       </div>

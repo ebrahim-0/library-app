@@ -6,3 +6,16 @@ input,
 select {
   @apply w-[400px] border border-gray-200 py-2 px-6 bg-zinc-100/40;
 }
+
+.dropdown {
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end border-4;
+}
+
+.dropdown_link {
+  @apply text-sm text-gray-700 hover:text-gray-500 font-medium;
+}
+
+.red_btn {
+  @apply rounded-full border border-transparent bg-red-500 py-1.5 px-5 text-white transition-all hover:border-black hover:bg-white hover:text-black text-center text-sm flex items-center justify-center;
+}
+

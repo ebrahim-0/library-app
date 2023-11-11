@@ -9,7 +9,7 @@ export default function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("user");
+  const [role, setRole] = useState("librarian");
   const [error, setError] = useState("");
 
   const router = useRouter();
@@ -90,8 +90,8 @@ export default function RegisterForm() {
             placeholder="Password"
           />
           <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
+            <option value="librarian">Librarian</option>
+            <option value="researchers&students">Researchers&Students</option>
           </select>
           <button className="bg-[#007bb6] text-white font-bold cursor-pointer px-6 py-2">
             Register

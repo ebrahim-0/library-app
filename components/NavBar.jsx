@@ -59,6 +59,18 @@ export default function NavBar() {
             </Link>
           </>
         )}
+        {session && (
+          <button
+            type="button"
+            className="red_btn w-full"
+            onClick={() => {
+              signOut();
+              setToggleDropdown(false);
+            }}
+          >
+            Sing Out
+          </button>
+        )}
       </div>
       <div className="sm:hidden flex relative">
         {

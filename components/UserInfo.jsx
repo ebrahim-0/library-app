@@ -8,7 +8,7 @@ export default function UserInfo() {
 
   return (
     <div className="grid place-items-center h-screen">
-      <div className="shadow-lg p-8 bg-zinc-300/10 flex flex-col gap-2 my-6">
+      <div className="shadow-lg p-8 bg-zinc-300/10 flex flex-col gap-2 my-6 w-[320px] sm:w-[450px]">
         <div>
           Name: <span className="font-bold">{session?.user?.name}</span>
         </div>
@@ -18,10 +18,7 @@ export default function UserInfo() {
         <div>
           Role: <span className="font-bold">{session?.user?._doc?.role}</span>
         </div>
-        <button
-          onClick={() => signOut()}
-          className="red_btn mt-3"
-        >
+        <button onClick={() => signOut()} className="red_btn mt-3">
           Log Out
         </button>
       </div>

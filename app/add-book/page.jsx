@@ -21,7 +21,8 @@ export default function AddBook() {
 
   const generateDownloadLink = () => {
     if (pdfFile) {
-      return URL.createObjectURL(pdfFile);
+      const downloadLink = URL.createObjectURL(pdfFile);
+      return downloadLink;
     }
     return null;
   };

@@ -6,7 +6,6 @@ import ProductCard from "@/components/ProductCard";
 export default function Products() {
   const [books, setBooks] = useState([]);
 
-  ("use server");
   useEffect(() => {
     (async () => {
       const res = await fetch("/api/book");

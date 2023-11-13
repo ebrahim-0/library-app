@@ -21,7 +21,7 @@ export default function Products() {
   useEffect(() => {
     (async () => {
       const res = await fetch("/api/book", {
-        cache: "no-cache",
+        next: { revalidate: 0 },
       });
       const data = await res.json();
       setBooks(data);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ProductCard from "@/components/ProductCard";
 
 export default function Products() {
   const [books, setBooks] = useState([]);

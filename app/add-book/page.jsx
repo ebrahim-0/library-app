@@ -21,7 +21,7 @@ export default function AddBook() {
 
   const generateDownloadLink = () => {
     if (pdfFile) {
-      const downloadLink = URL.createObjectURL(pdfFile);
+      const downloadLink = `${URL.createObjectURL(pdfFile)}`;
       return downloadLink;
     }
     return null;
@@ -85,7 +85,9 @@ export default function AddBook() {
             id="imageBook"
             accept="image/*"
             onChange={(e) => {
-              setImage(URL.createObjectURL(e.target.files[0]));
+              const timestamp = new Date().getTime();
+              const ImageLink = `${URL.createObjectURL(e.target.files[0])}`;
+              setImage(ImageLink);
             }}
           />
         </div>

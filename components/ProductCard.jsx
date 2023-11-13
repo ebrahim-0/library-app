@@ -9,7 +9,7 @@ export default function ProductCard({ book }) {
       <h3 className="my-7 text-xl text-center font-bold">{book.name}</h3>
       <p className="text-slate-800">{book.description}</p>
 
-      <a href={book.pdfBook} download="your_file_name.pdf">
+      <a href={book.pdfBook} download={book.name}>
         Download PDF
       </a>
     </div>

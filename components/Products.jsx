@@ -19,13 +19,12 @@ export default function Products() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch("/api/book", {
-        next: { revalidate: 0 },
-      });
+    const getBooks = async () => {
+      const res = await fetch("/api/book", { cache: "no-store" });
       const data = await res.json();
       setBooks(data);
-    })();
+    };
+    getBooks();
   }, []);
   return (
     <section className="bg-slate-200">

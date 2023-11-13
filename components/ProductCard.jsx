@@ -1,3 +1,5 @@
+"use client";
+
 export default function ProductCard({ book }) {
   return (
     <div className="bg-white p-2 h-full grid rounded-md shadow-2xl">

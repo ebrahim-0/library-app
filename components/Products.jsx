@@ -1,6 +1,6 @@
 "use client";
-import ProductCard from "@/components/ProductCard";
 import { useEffect, useState } from "react";
+import ProductCard from "@/components/ProductCard";
 
 const ProductCardList = ({ books }) => {
   return (
@@ -15,16 +15,16 @@ const ProductCardList = ({ books }) => {
   );
 };
 
-export default function Products() {
+const Products = () => {
   const [books, setBooks] = useState([]);
 
+  const getBooks = async () => {
+    const res = await fetch("/api/book");
+    const data = await res.json();
+    setBooks(data);
+  };
+
   useEffect(() => {
-    const getBooks = async () => {
-      "use server";
-      const res = await fetch("/api/book");
-      const data = await res.json();
-      setBooks(data);
-    };
     getBooks();
   }, []);
   return (
@@ -37,4 +37,6 @@ export default function Products() {
       </div>
     </section>
   );
-}
+};
+
+export default Products;

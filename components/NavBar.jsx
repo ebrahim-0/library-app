@@ -32,12 +32,17 @@ export default function NavBar() {
         >
           Home
         </Link>
-
         <Link
           href={session ? "/dashboard" : "/login"}
           className={`text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer`}
         >
           Dashboard
+        </Link>{" "}
+        <Link
+          href={"books"}
+          className={`text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer`}
+        >
+          Books
         </Link>
         <Link
           href={session ? "/add-book" : "/login"}

@@ -31,7 +31,7 @@ export default function Products() {
 const ProductCardList = ({ books }) => {
   return (
     <>
-      {books.map((book, i) => (
+      {books.map((book) => (
         <ProductCard book={book} />
       ))}
     </>

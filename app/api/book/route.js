@@ -4,7 +4,9 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export const GET = async (request) => {
+// export const revalidate = 10;
+
+export const GET = async () => {
   try {
     await connectMongoDB();
     const books = await Book.find({}).populate("creator");

@@ -107,6 +107,15 @@ export default function NavBar() {
               >
                 Dashboard
               </Link>
+              <Link href={"/books"} className="dropdown_link">
+                Books
+              </Link>
+              <Link
+                href={session ? "/add-book" : "/login"}
+                className="dropdown_link"
+              >
+                Add Book
+              </Link>
               {session && (
                 <button
                   type="button"

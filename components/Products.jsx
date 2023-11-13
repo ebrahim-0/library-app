@@ -32,7 +32,10 @@ const ProductCardList = ({ books }) => {
   return (
     <>
       {books.map((book) => (
-        <ProductCard book={book} />
+        <ProductCard
+          book={book}
+          key={Math.round(book._id * Math.random() * 1000)}
+        />
       ))}
     </>
   );

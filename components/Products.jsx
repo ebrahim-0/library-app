@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function Products() {
   const [books, setBooks] = useState([]);
 
+  ("use server");
   useEffect(() => {
     (async () => {
       const res = await fetch("/api/book");

@@ -1,5 +1,6 @@
 import { connectMongoDB } from "@/lib/mongodb";
 import Book from "@/models/book";
+import { NextResponse } from "next/server";
 
 export const POST = async (req) => {
   const { userId, name, imageBook, pdfBook, description } = await req.json();
@@ -15,12 +16,12 @@ export const POST = async (req) => {
     });
 
     await newBook.save();
-    return new Response(JSON.stringify(newBook), {
-      status: 201,
-    });
+
+    return NextResponse.json(newBook, { status: 201 });
   } catch (error) {
-    return new Response("Failed to create prompt", {
-      status: 500,
-    });
+    return NextResponse.json(
+      { message: "An error occurred while creating the book." },
+      { status: 500 },
+    );
   }
 };

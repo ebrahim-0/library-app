@@ -1,7 +1,7 @@
 export default function ProductCard({ book }) {
   return (
     <div
-      key={Math.round(book._id * Math.random() * 1000) + i}
+      key={Math.round(book._id * Math.random() * 1000)}
       className="bg-white p-2 h-full grid rounded-md shadow-2xl"
     >
       <img

@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
@@ -19,7 +17,10 @@ export default function Hero() {
         <span>To</span>
         <span>Our Library</span>
 
-        <Link href="login" className="bg-white text-black px-4 sm:px-7 py-2 rounded-lg">
+        <Link
+          href="login"
+          className="bg-white text-black px-4 sm:px-7 py-2 rounded-lg"
+        >
           Get Started
         </Link>
       </div>

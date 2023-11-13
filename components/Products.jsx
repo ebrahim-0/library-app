@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import { useEffect, useState } from "react";
 
 export default function Products() {
@@ -20,8 +18,11 @@ export default function Products() {
       <div className="w-4/5 mx-auto py-8">
         <h1 className="text-center text-4xl font-bold my-7">Our Books</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
-          {books.map((book) => (
-            <div className="bg-white p-2 h-full grid rounded-md shadow-2xl">
+          {books.map((book, i) => (
+            <div
+              key={Math.round(book._id * Math.random() * 1000) + i}
+              className="bg-white p-2 h-full grid rounded-md shadow-2xl"
+            >
               <img
                 src={book.imageBook}
                 alt=""

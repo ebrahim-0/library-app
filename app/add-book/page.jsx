@@ -85,7 +85,6 @@ export default function AddBook() {
             id="imageBook"
             accept="image/*"
             onChange={(e) => {
-              const timestamp = new Date().getTime();
               const ImageLink = `${URL.createObjectURL(e.target.files[0])}`;
               setImage(ImageLink);
             }}

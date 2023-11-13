@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: false,
-};
 
-module.exports = nextConfig;
+  experimental: {
+    serverComponents: true, // enable experimental server components
+    serverComponentsMiddleware: true, // enable middleware for server components
+  },
+};

@@ -12,10 +12,7 @@ export default function NavBar() {
   return (
     <nav className="flex justify-between items-center w-4/5 mx-auto py-5">
       <div>
-        <Link
-          href="/"
-          className={`text-white px-3 py-2 rounded-md text-xl font-medium transition-all duration-300 cursor-pointer`}
-        >
+        <Link href="/" className={"text-white text-xl font-medium"}>
           <img
             src="/logo.png"
             alt="logo"
@@ -25,28 +22,34 @@ export default function NavBar() {
         </Link>
       </div>
 
-      <div className="ml-auto sm:flex justify-center items-center gap-3 hidden">
+      <div className="ml-auto md:flex justify-center items-center gap-3 hidden">
         <Link
           href="/"
-          className={`text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer`}
+          className={
+            "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+          }
         >
           Home
         </Link>
         <Link
           href={session ? "/dashboard" : "/login"}
-          className={`text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer`}
+          className={
+            "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+          }
         >
           Dashboard
         </Link>{" "}
         <Link
           href={"books"}
-          className={`text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer`}
+          className={
+            "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+          }
         >
           Books
         </Link>
         <Link
           href={session ? "/add-book" : "/login"}
-          className={`text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer ${
+          className={`text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black ${
             session ? "" : "hidden"
           }`}
         >
@@ -56,14 +59,18 @@ export default function NavBar() {
           <>
             <Link
               href={"/login"}
-              className={`text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer`}
+              className={
+                "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+              }
             >
               Login
             </Link>
 
             <Link
               href={"/register"}
-              className="text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer"
+              className={
+                "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+              }
             >
               Register
             </Link>
@@ -72,7 +79,9 @@ export default function NavBar() {
         {session && (
           <Link
             href={"/profile"}
-            className={`text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer`}
+            className={
+              "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+            }
           >
             <span>Welcome, </span>
             <span className="font-semibold capitalize">
@@ -82,74 +91,77 @@ export default function NavBar() {
         )}
       </div>
 
-      <div className="flex relative sm:hidden">
-        <div className="flex sm:hidden">
-          <Menu
-            className="text-3xl text-white sm:hidden"
-            onClick={() => {
-              setToggleDropdown((prev) => !prev);
-            }}
-          />
+      <div className="flex relative md:hidden">
+        <Menu
+          className="text-3xl text-white md:hidden"
+          onClick={() => {
+            setToggleDropdown((prev) => !prev);
+          }}
+        />
 
-          {toggleDropdown && (
-            <div className="dropdown">
-              <Link
-                href="/"
-                className="dropdown_link"
-                onClick={() => setToggleDropdown(false)}
+        {toggleDropdown && (
+          <div className="dropdown">
+            <Link
+              href="/"
+              className="dropdown_link"
+              onClick={() => setToggleDropdown(false)}
+            >
+              Home
+            </Link>
+            <Link
+              href={session ? "/dashboard" : "/login"}
+              className="dropdown_link"
+              onClick={() => setToggleDropdown(false)}
+            >
+              Dashboard
+            </Link>
+            <Link
+              href={"/books"}
+              className="dropdown_link"
+              onClick={() => setToggleDropdown(false)}
+            >
+              Books
+            </Link>
+            <Link
+              href={session ? "/add-book" : "/login"}
+              className="dropdown_link"
+              onClick={() => setToggleDropdown(false)}
+            >
+              Add Book
+            </Link>
+            {session && (
+              <button
+                type="button"
+                className="red_btn w-full"
+                onClick={() => {
+                  signOut().then((r) => console.log(r));
+                  setToggleDropdown(false);
+                }}
               >
-                Home
-              </Link>
-              <Link
-                href={session ? "/dashboard" : "/login"}
-                className="dropdown_link"
-                onClick={() => setToggleDropdown(false)}
-              >
-                Dashboard
-              </Link>
-              <Link href={"/books"} className="dropdown_link">
-                Books
-              </Link>
-              <Link
-                href={session ? "/add-book" : "/login"}
-                className="dropdown_link"
-              >
-                Add Book
-              </Link>
-              {session && (
-                <button
-                  type="button"
-                  className="red_btn w-full"
-                  onClick={() => {
-                    signOut().then((r) => console.log(r));
-                    setToggleDropdown(false);
-                  }}
+                Sign Out
+              </button>
+            )}
+            {!session && (
+              <>
+                <Link
+                  href={"/login"}
+                  className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}
                 >
-                  Sign Out
-                </button>
-              )}
-              {!session && (
-                <>
-                  <Link
-                    href={"/login"}
-                    className="dropdown_link"
-                    onClick={() => setToggleDropdown(false)}
-                  >
-                    Login
-                  </Link>
+                  Login
+                </Link>
 
-                  <Link
-                    href={"/register"}
-                    className="dropdown_link"
-                    onClick={() => setToggleDropdown(false)}
-                  >
-                    Register
-                  </Link>
-                </>
-              )}
-            </div>
-          )}
-        </div>
+                <Link
+                  href={"/register"}
+                  className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </nav>
   );

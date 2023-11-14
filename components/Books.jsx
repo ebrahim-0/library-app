@@ -13,7 +13,7 @@ const BookCardList = ({ books }) => {
   );
 };
 
-const Books = () => {
+const Books = ({ books }) => {
   return (
     <section className="bg-slate-200">
       <div className="w-4/5 mx-auto py-8">

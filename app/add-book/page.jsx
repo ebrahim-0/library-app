@@ -1,15 +1,14 @@
 "use client";
 
 import { UploadDropzone } from "@/lib/uploadthing";
-import { Image, FileText, Pencil, Plus } from "lucide-react";
-
+import { Image, FileText, Pencil, Plus, Loader2 } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import "@uploadthing/react/styles.css";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
+import "@uploadthing/react/styles.css";
 
 export default function AddBook() {
   const { data: session } = useSession();
@@ -19,6 +18,7 @@ export default function AddBook() {
   const [bookImageUrl, setBookImageUrl] = useState("");
   const [bookPdfUrl, setBookPdfUrl] = useState("");
   const { handleSubmit, register } = useForm();
+  const [submitting, setSubmitting] = useState(false);
 
   async function onSubmit(data) {
     data.bookImageUrl = bookImageUrl;
@@ -33,18 +33,26 @@ export default function AddBook() {
       toast.info("Please fill all the fields", {
         position: toast.POSITION.TOP_RIGHT,
       });
+      setSubmitting(false);
     } else {
+      setSubmitting(true);
       try {
         const response = await fetch("/api/book/new", {
           method: "POST",
           body: JSON.stringify({
             name: data.name,
+            description: data.description,
+            author: data.author,
+            dateOfPublication: data.dateOfPublication,
+            category: data.category,
             imageBook: data.bookImageUrl,
             pdfBook: data.bookPdfUrl,
-            description: data.description,
             userId: session?.user?._doc?._id,
           }),
         });
+
+        console.log(response);
+        console.log(response.json());
 
         if (response.ok) {
           toast.success("Book Added Successfully", {
@@ -54,6 +62,8 @@ export default function AddBook() {
           setTimeout(() => {
             router.push("/books");
           }, 2000);
+        } else {
+          setSubmitting(false);
         }
       } catch (error) {
         console.log(error);
@@ -83,6 +93,82 @@ export default function AddBook() {
                 autoComplete="given-name"
                 className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-900 sm:text-sm sm:leading-6"
                 placeholder="Type the Book Name"
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-2">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium leading-6 text-gray-900 mb-2 "
+            >
+              Book Description
+            </label>
+            <div className="mt-2 pb-4 border-b-2">
+              <textarea
+                {...register("description")}
+                name="description"
+                id="description"
+                autoComplete="given-name"
+                className="block w-full h-28 rounded-md border-0 py-2 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-900 sm:text-sm sm:leading-6"
+                placeholder="Type the Description of Book"
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-2">
+            <label
+              htmlFor="author"
+              className="block text-sm font-medium leading-6 text-gray-900 mb-2 "
+            >
+              Author
+            </label>
+            <div className="mt-2 pb-4 border-b-2">
+              <input
+                type="text"
+                {...register("author")}
+                name="author"
+                id="author"
+                autoComplete="given-name"
+                className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-900 sm:text-sm sm:leading-6"
+                placeholder="Type the Author of Book"
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-2">
+            <label
+              htmlFor="dateofpublication"
+              className="block text-sm font-medium leading-6 text-gray-900 mb-2 "
+            >
+              Date of Publication
+            </label>
+            <div className="mt-2 pb-4 border-b-2">
+              <input
+                type="date"
+                {...register("dateOfPublication")}
+                name="dateOfPublication"
+                id="dateofpublication"
+                autoComplete="given-name"
+                className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-900 sm:text-sm sm:leading-6"
+                onClick={(e) => e.target.showPicker()}
+                max={new Date().toISOString().split("T")[0]}
+              />
+            </div>
+          </div>{" "}
+          <div className="sm:col-span-2">
+            <label
+              htmlFor="category"
+              className="block text-sm font-medium leading-6 text-gray-900 mb-2 "
+            >
+              Category
+            </label>
+            <div className="mt-2 pb-4 border-b-2">
+              <input
+                type="text"
+                {...register("category")}
+                name="category"
+                id="category"
+                autoComplete="given-name"
+                className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-900 sm:text-sm sm:leading-6"
+                placeholder={"Type the Category of Book"}
               />
             </div>
           </div>
@@ -127,6 +213,7 @@ export default function AddBook() {
                   });
                 }}
                 onUploadError={(error) => {
+                  console.log(error);
                   // Do something with the error.
                   toast.error(error.message, {
                     position: toast.POSITION.TOP_RIGHT,
@@ -166,7 +253,7 @@ export default function AddBook() {
               </Link>
             ) : (
               <UploadDropzone
-                endpoint="bookImage"
+                endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                   setBookImageUrl(res[0].fileUrl);
                   // Do something with the response
@@ -176,6 +263,8 @@ export default function AddBook() {
                   });
                 }}
                 onUploadError={(error) => {
+                  console.log(error);
+
                   // Do something with the error.
                   toast.error(error.message, {
                     position: toast.POSITION.TOP_RIGHT,
@@ -184,33 +273,25 @@ export default function AddBook() {
               />
             )}
           </div>
-          <div className="sm:col-span-2">
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium leading-6 text-gray-900 mb-2 "
-            >
-              Book Name
-            </label>
-            <div className="mt-2 pb-4 border-b-2">
-              <textarea
-                {...register("description")}
-                name="description"
-                id="description"
-                autoComplete="given-name"
-                className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-900 sm:text-sm sm:leading-6"
-                placeholder="Type the Description of Book"
-              />
-            </div>
-          </div>
         </div>
-        <button
-          type="submit"
-          className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#007bb6] rounded-lg focus:ring-1 focus:ring-gray-800 hover:bg-[#007bb6]/80"
-        >
-          <Plus className="w-5 h-5 mr-2" />
-          <span>Add Book</span>
-        </button>
+
+        {!submitting ? (
+          <button
+            type="submit"
+            className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#007bb6] rounded-lg focus:ring-1 focus:ring-gray-800 hover:bg-[#007bb6]/80"
+          >
+            <Plus className="w-5 h-5 mr-2" />
+            <span>Add Book</span>
+          </button>
+        ) : (
+          <div className="inline-flex gap-2 justify-center items-center px-5 py-2 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-[#007bb6] rounded-lg focus:ring-1 focus:ring-gray-800 hover:bg-[#007bb6]/80">
+            <Loader2 className={"animate-spin text-white"} />
+            <span>Uploading...</span>
+          </div>
+        )}
       </form>
+
+      <div></div>
       <ToastContainer />
     </div>
   );

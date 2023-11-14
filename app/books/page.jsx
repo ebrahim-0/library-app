@@ -3,7 +3,7 @@
 import Books from "@/components/Books";
 import { useEffect, useState } from "react";
 
-export default function page() {
+export default function Books() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {

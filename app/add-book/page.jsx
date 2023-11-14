@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 
-export default function page() {
+export default function AddBook() {
   const { data: session } = useSession();
 
   const router = useRouter();

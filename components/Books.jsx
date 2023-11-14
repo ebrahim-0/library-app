@@ -1,7 +1,4 @@
-"use client";
-
 import BookCard from "@/components/BookCard";
-import { useEffect, useState } from "react";
 
 const BookCardList = ({ books }) => {
   return (
@@ -17,16 +14,6 @@ const BookCardList = ({ books }) => {
 };
 
 const Books = () => {
-  const [books, setBooks] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch("/api/book");
-      const data = await res.json();
-      setBooks(data);
-    })();
-  }, []);
-
   return (
     <section className="bg-slate-200">
       <div className="w-4/5 mx-auto py-8">

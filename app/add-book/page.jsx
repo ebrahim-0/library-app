@@ -19,6 +19,7 @@ export default function AddBook() {
   const [bookImageUrl, setBookImageUrl] = useState("");
   const [bookPdfUrl, setBookPdfUrl] = useState("");
   const { handleSubmit, register } = useForm();
+
   async function onSubmit(data) {
     data.bookImageUrl = bookImageUrl;
     data.bookPdfUrl = bookPdfUrl;
@@ -60,6 +61,7 @@ export default function AddBook() {
     }
     console.log(data);
   }
+
   return (
     <div className="w-full md:max-w-3xl p-8 my-16 bg-white border border-gray-200 rounded-lg shadow mx-auto">
       <h2 className="text-4xl text-center font-semibold py-8">Add New Book</h2>
@@ -117,7 +119,6 @@ export default function AddBook() {
                 endpoint="pdfUploader"
                 onClientUploadComplete={(res) => {
                   setBookPdfUrl(res[0].fileUrl);
-                  console.log(res);
                   // Do something with the response
                   console.log("Files: ", res);
 

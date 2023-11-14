@@ -3,7 +3,7 @@ import { connectMongoDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
 // export const dynamic = "force-dynamic";
-export const dynamic = "no-cache";
+export const dynamic = "auto";
 
 // export const revalidate = 10;
 

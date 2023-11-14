@@ -3,7 +3,7 @@
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
-import { FaBars } from "react-icons/fa";
+import { Menu } from "lucide-react";
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -70,22 +70,22 @@ export default function NavBar() {
           </>
         )}
         {session && (
-          <button
-            className="red_btn"
-            onClick={() => {
-              signOut().then((r) => console.log(r));
-              setToggleDropdown(false);
-            }}
+          <Link
+            href={"/profile"}
+            className={`text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer`}
           >
-            Log Out
-          </button>
+            <span>Welcome, </span>
+            <span className="font-semibold capitalize">
+              {session.user.name}
+            </span>
+          </Link>
         )}
       </div>
 
-      <div className="sm:hidden flex relative">
-        <div className="flex">
-          <FaBars
-            className="text-3xl text-white"
+      <div className="flex relative sm:hidden">
+        <div className="flex sm:hidden">
+          <Menu
+            className="text-3xl text-white sm:hidden"
             onClick={() => {
               setToggleDropdown((prev) => !prev);
             }}

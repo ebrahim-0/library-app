@@ -1,4 +1,4 @@
-import Products from "@/components/Products";
+import Books from "@/components/Books";
 
 export default function page() {
   return (
@@ -7,7 +7,7 @@ export default function page() {
         Welcome to Our Books
       </h1>
 
-      <Products />
+      <Books />
     </div>
   );
 }

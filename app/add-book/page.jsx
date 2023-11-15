@@ -51,9 +51,6 @@ export default function AddBook() {
           }),
         });
 
-        console.log(response);
-        console.log(response.json());
-
         if (response.ok) {
           toast.success("Book Added Successfully", {
             position: toast.POSITION.TOP_RIGHT,
@@ -69,7 +66,6 @@ export default function AddBook() {
         console.log(error);
       }
     }
-    console.log(data);
   }
 
   return (
@@ -206,7 +202,6 @@ export default function AddBook() {
                 onClientUploadComplete={(res) => {
                   setBookPdfUrl(res[0].fileUrl);
                   // Do something with the response
-                  console.log("Files: ", res);
 
                   toast.success("Upload Completed", {
                     position: toast.POSITION.TOP_RIGHT,
@@ -257,14 +252,11 @@ export default function AddBook() {
                 onClientUploadComplete={(res) => {
                   setBookImageUrl(res[0].fileUrl);
                   // Do something with the response
-                  console.log("Files: ", res);
                   toast.success("Upload Completed", {
                     position: toast.POSITION.TOP_RIGHT,
                   });
                 }}
                 onUploadError={(error) => {
-                  console.log(error);
-
                   // Do something with the error.
                   toast.error(error.message, {
                     position: toast.POSITION.TOP_RIGHT,
@@ -291,7 +283,6 @@ export default function AddBook() {
         )}
       </form>
 
-      <div></div>
       <ToastContainer />
     </div>
   );

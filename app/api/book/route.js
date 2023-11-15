@@ -2,9 +2,9 @@ import Book from "@/models/book";
 import { connectMongoDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
-// export const revalidate = 10;
+export const revalidate = 10;
 
 export const GET = async () => {
   try {

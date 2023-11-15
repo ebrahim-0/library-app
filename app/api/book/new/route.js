@@ -17,7 +17,7 @@ export const POST = async (req) => {
   try {
     await connectMongoDB();
 
-    const newBook = new Book({
+    await Book.create({
       creator: userId,
       name,
       imageBook,
@@ -28,9 +28,7 @@ export const POST = async (req) => {
       category,
     });
 
-    await newBook.save();
-
-    return NextResponse.json(newBook, { status: 201 });
+    return NextResponse.json({ message: "Book created." }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { message: "An error occurred while creating the book." },

@@ -15,7 +15,7 @@ const MyProfile = () => {
     };
 
     if (session?.user?.sub) fetchBooks();
-  }, [session?.user?.sub]);
+  }, []);
 
   console.log(books);
 

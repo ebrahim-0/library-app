@@ -31,15 +31,17 @@ export default function BookCard({ book, handleDelete }) {
           <span className="text-gray-700 font-bold">Description:</span>{" "}
           {book.description}
         </p>
-        <div className="my-4 mx-auto">
-          <a
-            href={book.pdfBook}
-            download={`${book.name}.pdf`}
-            className="inline-block px-4 py-2 text-sm font-medium text-white bg-[#007bb6] rounded-full hover:bg-[#007bb6]/80 focus:outline-none focus:ring focus:border-blue-300"
-          >
-            Download PDF
-          </a>
-        </div>
+        {pathName !== "/profile" && (
+          <div className="my-4 mx-auto">
+            <a
+              href={book.pdfBook}
+              download={`${book.name}.pdf`}
+              className="inline-block px-4 py-2 text-sm font-medium text-white bg-[#007bb6] rounded-full hover:bg-[#007bb6]/80 focus:outline-none focus:ring focus:border-blue-300"
+            >
+              Download PDF
+            </a>
+          </div>
+        )}
       </div>
       {session?.user?.sub === book?.creator?._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">

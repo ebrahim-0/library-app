@@ -8,13 +8,14 @@ const MyProfile = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const response = await fetch(`/api/users/${session?.user.sub}/books`);
-      const data = await response.json();
-
+    const fetchBooks = async () => {
+      const res = await fetch("/api/book");
+      const data = await res.json();
       setBooks(data);
-    })();
-  }, [session?.user.sub]);
+    };
+
+    if (session?.user?.sub) fetchBooks();
+  }, [session?.user?.sub]);
 
   console.log(books);
 

@@ -45,17 +45,6 @@ export default function BookCard({ book, handleDelete }) {
         )}
       </div>
 
-      {/*{session?.user?.sub == book.creator._id && pathName === "/profile" && (*/}
-      {/*  <div className="flex-center gap-4 mt-5 border-t border-gray-100 pt-3">*/}
-      {/*    <p*/}
-      {/*      className="font-inter text-sm orange_gradient cursor-pointer"*/}
-      {/*      onClick={handleDelete}*/}
-      {/*    >*/}
-      {/*      Delete*/}
-      {/*    </p>*/}
-      {/*  </div>*/}
-      {/*)}*/}
-
       {session?.user?.sub == book?.creator?._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p

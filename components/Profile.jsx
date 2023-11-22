@@ -13,7 +13,7 @@ export default function Profile({ books, desc, name, handleDelete }) {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 my-10">
-        {books?.map((book) => (
+        {books.map((book) => (
           <BookCard
             key={book._id}
             book={book}

@@ -130,6 +130,19 @@ export default function NavBar() {
               Add Book
             </Link>
             {session && (
+              <Link
+                href={"/profile"}
+                className={
+                  "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+                }
+              >
+                <span>Welcome, </span>
+                <span className="font-semibold capitalize">
+                  {session.user.name}
+                </span>
+              </Link>
+            )}
+            {session && (
               <button
                 type="button"
                 className="red_btn w-full"

@@ -2,8 +2,15 @@
 
 import Books from "@/components/Books";
 import { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function ViewBooks() {
+  const { data: session } = useSession();
+
+  if (session && session.user?._doc?.role !== "researchers&students")
+    redirect("/profile");
+
   const [books, setBooks] = useState([]);
 
   useEffect(() => {

@@ -16,9 +16,8 @@ export default function NavBar() {
           <img
             src="/logo.png"
             alt="logo"
-            className="w-10 h-10 inline-block mr-2"
+            className="h-[60px] w-full inline-block mr-2"
           />
-          Library App
         </Link>
       </div>
 
@@ -39,22 +38,42 @@ export default function NavBar() {
         >
           Dashboard
         </Link>{" "}
-        <Link
-          href={"books"}
-          className={
-            "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
-          }
-        >
-          Books
-        </Link>
-        <Link
-          href={session ? "/add-book" : "/login"}
-          className={`text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black ${
-            session ? "" : "hidden"
-          }`}
-        >
-          Add Book
-        </Link>
+        {session && session.user?._doc?.role !== "librarian" && (
+          <Link
+            href={"books"}
+            className={
+              "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+            }
+          >
+            Books
+          </Link>
+        )}
+        {session && session.user?._doc?.role === "librarian" && (
+          <>
+            <Link
+              href={session ? "/add-book" : "/login"}
+              className={`text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black ${
+                session ? "" : "hidden"
+              }`}
+            >
+              Add Book
+            </Link>
+
+            {session && (
+              <Link
+                href={"/profile"}
+                className={
+                  "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
+                }
+              >
+                <span>Welcome, </span>
+                <span className="font-semibold capitalize">
+                  {session.user.name}
+                </span>
+              </Link>
+            )}
+          </>
+        )}
         {!session && (
           <>
             <Link
@@ -75,19 +94,6 @@ export default function NavBar() {
               Register
             </Link>
           </>
-        )}
-        {session && (
-          <Link
-            href={"/profile"}
-            className={
-              "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
-            }
-          >
-            <span>Welcome, </span>
-            <span className="font-semibold capitalize">
-              {session.user.name}
-            </span>
-          </Link>
         )}
       </div>
 

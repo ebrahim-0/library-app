@@ -2,11 +2,12 @@
 
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-export default function BookCard({ book, handleDelete }) {
+export default function BookCard({ book, handleEdit, handleDelete }) {
   const pathName = usePathname();
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <div className="bg-white p-4 h-full grid rounded-md shadow-lg">
@@ -33,22 +34,41 @@ export default function BookCard({ book, handleDelete }) {
           {book.description}
         </p>
         {pathName !== "/profile" && (
-          <div className="my-4 mx-auto">
-            <a
-              href={book.pdfBook}
-              download={`${book.name}.pdf`}
-              className="inline-block px-4 py-2 text-sm font-medium text-white bg-[#007bb6] rounded-full hover:bg-[#007bb6]/80 focus:outline-none focus:ring focus:border-blue-300"
-            >
-              Download PDF
-            </a>
-          </div>
+          <>
+            {status === "authenticated" ? (
+              <div className="my-4 mx-auto">
+                <a
+                  href={book.pdfBook}
+                  download={`${book.name}.pdf`}
+                  className="inline-block px-4 py-2 text-sm font-medium text-white bg-[#007bb6] rounded-full hover:bg-[#007bb6]/80 focus:outline-none focus:ring focus:border-blue-300"
+                >
+                  Download PDF
+                </a>
+              </div>
+            ) : (
+              <div className="my-4 mx-auto">
+                <Link
+                  href={"/login"}
+                  className="inline-block px-4 py-2 text-sm font-medium text-white bg-[#007bb6] rounded-full hover:bg-[#007bb6]/80 focus:outline-none focus:ring focus:border-blue-300"
+                >
+                  Login to download
+                </Link>
+              </div>
+            )}
+          </>
         )}
       </div>
 
-      {session?.user?.sub == book?.creator?._id && pathName === "/profile" && (
-        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+      {session?.user?.sub === book?.creator?._id && pathName === "/profile" && (
+        <div className="mt-5 flex justify-center items-center gap-4 border-t border-gray-100 pt-3">
           <p
-            className="font-medium text-sm bg-gradient-to-r from-red-500 via-rose-600 to-yellow-500 bg-clip-text text-transparent cursor-pointer"
+            className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent text-sm cursor-pointer"
+            onClick={handleEdit}
+          >
+            Update
+          </p>
+          <p
+            className="font-medium text-sm bg-gradient-to-r from-red-500 to-rose-600 bg-clip-text text-transparent cursor-pointer"
             onClick={handleDelete}
           >
             Delete

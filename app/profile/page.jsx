@@ -2,10 +2,22 @@
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import Profile from "@/components/Profile";
+import { redirect, useRouter } from "next/navigation";
 
 const MyProfile = () => {
-  const { data: session } = useSession();
+  const router = useRouter();
+
+  const { data: session, status } = useSession();
   const [books, setBooks] = useState([]);
+
+  if (status !== "authenticated") redirect("/login");
+  if (session && session.user?._doc?.role !== "librarian") redirect("/books");
+
+  console.log(status);
+
+  const handleEdit = (post) => {
+    router.push(`/update-book?id=${post._id}`);
+  };
 
   const handleDelete = async (book) => {
     const hasConfirmed = confirm("Are you sure you want to delete this Book?");
@@ -35,14 +47,13 @@ const MyProfile = () => {
     if (session?.user?.sub) fetchBooks();
   }, [session?.user?.sub]);
 
-  console.log(books);
-
   return (
     <Profile
       name={session?.user.name}
       books={books}
       desc={"My Books"}
       handleDelete={handleDelete}
+      handleEdit={handleEdit}
     />
   );
 };

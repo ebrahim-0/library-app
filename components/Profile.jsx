@@ -1,6 +1,12 @@
 import BookCard from "@/components/BookCard";
 
-export default function Profile({ books, desc, name, handleDelete }) {
+export default function Profile({
+  books,
+  desc,
+  name,
+  handleDelete,
+  handleEdit,
+}) {
   return (
     <section className="w-4/5 mx-auto py-8">
       <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-left">
@@ -18,6 +24,7 @@ export default function Profile({ books, desc, name, handleDelete }) {
             key={book._id}
             book={book}
             handleDelete={() => handleDelete && handleDelete(book)}
+            handleEdit={() => handleEdit && handleEdit(book)}
           />
         ))}
       </div>

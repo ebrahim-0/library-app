@@ -1,18 +1,24 @@
-import getBooks from "@/lib/getBooks";
-import Books from "@/components/Books";
+"use client";
 
-const ViewBooks = async () => {
-  const books = await getBooks();
+import Books from "@/components/Books";
+import { useEffect, useState } from "react";
+
+export default function ViewBooks() {
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("/api/book");
+      const data = await res.json();
+      setBooks(data);
+    })();
+  }, []);
+
+  console.log(books);
 
   return (
     <div>
-      <h1 className={"text-center text-4xl font-bold my-7"}>
-        Welcome to Our Books
-      </h1>
-
       <Books books={books} />
     </div>
   );
-};
-
-export default ViewBooks;
+}

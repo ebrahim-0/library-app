@@ -73,8 +73,6 @@ export default function AddBook() {
     }
   };
 
-  console.log(book);
-
   return (
     <Form
       type={"Add"}

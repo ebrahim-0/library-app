@@ -4,7 +4,7 @@ import { FileText, Image, Loader2, Pencil, Plus } from "lucide-react";
 import Link from "next/link";
 import { UploadDropzone } from "@/lib/uploadthing";
 import { toast, ToastContainer } from "react-toastify";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function Form({
@@ -146,7 +146,7 @@ export default function Form({
               >
                 Book PDF
               </label>
-              {book.pdfBook && (
+              {book?.pdfBook && (
                 <button
                   onClick={() => setBook((prev) => ({ ...prev, pdfBook: "" }))}
                   type="button"
@@ -157,7 +157,7 @@ export default function Form({
                 </button>
               )}
             </div>
-            {book.pdfBook ? (
+            {book?.pdfBook ? (
               <Link
                 className="flex space-x-3 items-center text-purple-600"
                 target="_blank"

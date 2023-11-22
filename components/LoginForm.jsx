@@ -43,6 +43,7 @@ export default function LoginForm() {
             onChange={(e) => setEmail(e.target.value)}
             type="text"
             placeholder="Email"
+            autoComplete="true"
           />
           <input
             onChange={(e) => setPassword(e.target.value)}

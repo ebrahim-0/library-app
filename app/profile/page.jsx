@@ -13,8 +13,6 @@ const MyProfile = () => {
   if (status !== "authenticated") redirect("/login");
   if (session && session.user?._doc?.role !== "librarian") redirect("/books");
 
-  console.log(status);
-
   const handleEdit = (post) => {
     router.push(`/update-book?id=${post._id}`);
   };

@@ -132,9 +132,8 @@ export default function NavBar() {
             {session && (
               <Link
                 href={"/profile"}
-                className={
-                  "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
-                }
+                className="dropdown_link"
+                onClick={() => setToggleDropdown(false)}
               >
                 <span>Welcome, </span>
                 <span className="font-semibold capitalize">

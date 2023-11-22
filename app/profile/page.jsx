@@ -9,13 +9,15 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const res = await fetch(`/api/users/${session?.user?.sub}/books`);
+      const res = await fetch(`/api/users/${session?.user?.sub}/books`, {
+        cache: "no-cache",
+      });
       const data = await res.json();
       setBooks(data);
     };
 
     if (session?.user?.sub) fetchBooks();
-  }, []);
+  }, [session?.user?.sub]);
 
   console.log(books);
 

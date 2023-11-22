@@ -7,20 +7,6 @@ const MyProfile = () => {
   const { data: session } = useSession();
   const [books, setBooks] = useState([]);
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      const res = await fetch(`/api/users/${session?.user?.sub}/books`, {
-        cache: "no-cache",
-      });
-      const data = await res.json();
-      setBooks(data);
-    };
-
-    if (session?.user?.sub) fetchBooks();
-  }, [session?.user?.sub]);
-
-  console.log(books);
-
   const handleDelete = async (book) => {
     const hasConfirmed = confirm("Are you sure you want to delete this Book?");
 
@@ -38,6 +24,18 @@ const MyProfile = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const res = await fetch(`/api/users/${session?.user?.sub}/books`);
+      const data = await res.json();
+      setBooks(data);
+    };
+
+    if (session?.user?.sub) fetchBooks();
+  }, []);
+
+  console.log(books);
 
   return (
     <Profile

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 export default function BookCard({ book, handleDelete }) {
   const pathName = usePathname();
+
   const { data: session } = useSession();
 
   return (
@@ -43,7 +44,19 @@ export default function BookCard({ book, handleDelete }) {
           </div>
         )}
       </div>
-      {session?.user?.sub === book?.creator?._id && pathName === "/profile" && (
+
+      {session?.user?.sub == book.creator._id && pathName === "/profile" && (
+        <div className="flex-center gap-4 mt-5 border-t border-gray-100 pt-3">
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={handleDelete}
+          >
+            Delete
+          </p>
+        </div>
+      )}
+
+      {session?.user?.sub == book.creator._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-medium text-sm bg-gradient-to-r from-red-500 via-rose-600 to-yellow-500 bg-clip-text text-transparent cursor-pointer"

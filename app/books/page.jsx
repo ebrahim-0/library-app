@@ -38,15 +38,23 @@ export default function ViewBooks() {
 
   const handleSearchChange = (e) => {
     e.preventDefault();
+    performSearch(e.target.value);
+  };
+
+  const performSearch = (value) => {
     clearTimeout(searchTimeout);
-    setSearchText(e.target.value);
+    setSearchText(value);
     setSearchTimeout(
       setTimeout(() => {
-        const searchResults = filterBooks(e.target.value);
+        const searchResults = filterBooks(value);
         setSearchedResults(searchResults);
       }, 500),
     );
   };
+
+  useEffect(() => {
+    performSearch(searchText);
+  }, [searchOption, searchText]);
 
   return (
     <section className="bg-slate-200">
@@ -55,8 +63,8 @@ export default function ViewBooks() {
         <div className="w-full bg-white border border-gray-200 rounded-md flex items-center shadow-lg mt-16 mx-auto">
           <input
             type="search"
-            placeholder="Search for a Book"
-            className="w-full placeholder:text-black py-2.5 font-satoshi pl-5 pr-5 text-sm focus:border-transparent focus:outline-none focus:ring-0 border-none"
+            placeholder={`Search for a Book By his ${searchOption}`}
+            className="w-full placeholder:capitalize placeholder:text-black py-2.5 font-satoshi pl-5 pr-5 text-sm focus:border-transparent focus:outline-none focus:ring-0 border-none"
             required
             value={searchText}
             onChange={handleSearchChange}

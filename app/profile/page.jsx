@@ -49,7 +49,6 @@ const MyProfile = () => {
     <Profile
       name={session?.user.name}
       books={books}
-      desc={"My Books"}
       handleDelete={handleDelete}
       handleEdit={handleEdit}
     />

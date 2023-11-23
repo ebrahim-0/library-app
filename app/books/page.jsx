@@ -60,21 +60,31 @@ export default function ViewBooks() {
     <section className="bg-slate-200">
       <div className="w-4/5 mx-auto py-8">
         <h1 className="text-center text-4xl font-bold my-7">Our Books</h1>
-        <div className="w-full bg-white border border-gray-200 rounded-md flex items-center shadow-lg mt-16 mx-auto">
+        <div className="w-full max-w-3xl bg-white border-2 border-slate-600 rounded-md flex items-center shadow-lg mt-16 mx-auto">
           <input
-            type="search"
-            placeholder={`Search for a Book By his ${searchOption}`}
-            className="w-full placeholder:capitalize placeholder:text-black py-2.5 font-satoshi pl-5 pr-5 text-sm focus:border-transparent focus:outline-none focus:ring-0 border-none"
+            type={searchOption === "dateOfPublication" ? "date" : "search"}
+            placeholder={
+              searchOption === "dateOfPublication"
+                ? "Select a date"
+                : `Search for a book by ${searchOption}`
+            }
+            onClick={(e) => {
+              if (searchOption === "dateOfPublication") {
+                e.target.showPicker();
+              }
+            }}
+            max={new Date().toISOString().split("T")[0]}
+            className="w-full placeholder:text-black py-2.5 font-satoshi pl-5 pr-5 text-sm focus:border-transparent focus:outline-none focus:ring-0 border-none"
             required
             value={searchText}
             onChange={handleSearchChange}
           />
-          <div className="border h-10 border-gray-400"></div>
+          <div className="border h-10 border-slate-600"></div>
 
           <select
             value={searchOption}
             onChange={handleOptionChange}
-            className="w-1/5 py-2.5 text-black font-satoshi mr-3 text-sm focus:outline-none focus:ring-0 border-none"
+            className="w-1/5 p-0 py-2.5 text-black font-satoshi mr-3 text-sm focus:outline-none focus:ring-0 border-none"
           >
             <option className="py-2" value="name">
               Name
@@ -85,11 +95,27 @@ export default function ViewBooks() {
             <option className="py-2" value="author">
               Author
             </option>
+            <option className="py-2" value="dateOfPublication">
+              Publication Date
+            </option>
           </select>
         </div>
 
         {searchText ? (
-          <Books books={searchedResults} />
+          <>
+            {searchedResults.length > 0 ? (
+              <Books books={searchedResults} />
+            ) : (
+              <div className="flex flex-col items-center my-[62px]">
+                <p className="text-gray-500 text-2xl font-bold">
+                  Oops! No Books Found.
+                </p>
+                <p className="text-gray-500 mt-2">
+                  Please try searching another keyword.
+                </p>
+              </div>
+            )}
+          </>
         ) : (
           <Books books={books} />
         )}

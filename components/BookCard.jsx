@@ -10,7 +10,7 @@ export default function BookCard({ book, handleEdit, handleDelete }) {
   const { data: session, status } = useSession();
 
   return (
-    <div className="bg-white p-4 h-full grid rounded-md shadow-lg">
+    <div className="bg-white p-4 h-full grid rounded-md shadow-2xl">
       <img
         src={book.imageBook}
         alt={book.name}

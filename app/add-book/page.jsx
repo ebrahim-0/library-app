@@ -62,7 +62,7 @@ export default function AddBook() {
           });
 
           setTimeout(() => {
-            router.push("/books");
+            router.push("/search");
           }, 2000);
         } else {
           setSubmitting(false);

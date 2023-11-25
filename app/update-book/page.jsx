@@ -66,7 +66,7 @@ export default function UpdateBook() {
         });
 
         setTimeout(() => {
-          router.push("/books");
+          router.push("/search");
         }, 2000);
       }
     } catch (error) {

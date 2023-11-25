@@ -40,12 +40,12 @@ export default function NavBar() {
         </Link>{" "}
         {session && session.user?._doc?.role !== "librarian" && (
           <Link
-            href={"books"}
+            href={"search"}
             className={
               "text-white px-2 py-2 rounded-md text-sm font-medium transition-all duration-300 cursor-pointer hover:bg-white hover:text-black"
             }
           >
-            Books
+            Search
           </Link>
         )}
         {session && session.user?._doc?.role === "librarian" && (
@@ -122,7 +122,7 @@ export default function NavBar() {
               Dashboard
             </Link>
             <Link
-              href={"/books"}
+              href={"/search"}
               className="dropdown_link"
               onClick={() => setToggleDropdown(false)}
             >

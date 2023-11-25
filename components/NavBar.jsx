@@ -126,7 +126,7 @@ export default function NavBar() {
               className="dropdown_link"
               onClick={() => setToggleDropdown(false)}
             >
-              Books
+              Search
             </Link>
             <Link
               href={session ? "/add-book" : "/login"}

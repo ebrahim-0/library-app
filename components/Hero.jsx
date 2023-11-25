@@ -26,7 +26,7 @@ export default function Hero() {
             session
               ? session.user?._doc?.role === "librarian"
                 ? "add-book"
-                : "books"
+                : "search"
               : "login"
           }
           className="bg-white text-black px-4 sm:px-7 py-2 rounded-lg"
@@ -39,7 +39,7 @@ export default function Hero() {
             <span>OR</span>
 
             <Link
-              href="/books"
+              href={"/search"}
               className="bg-white text-black px-4 sm:px-7 py-2 rounded-lg"
             >
               See Our Books

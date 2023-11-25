@@ -48,7 +48,7 @@ export default function NavBar() {
             Search
           </Link>
         )}
-        {session && session.user?._doc?.role === "librarian" && (
+        {session && session.user?._doc?.role !== "researchers&students" && (
           <>
             <Link
               href={session ? "/add-book" : "/login"}

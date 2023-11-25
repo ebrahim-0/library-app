@@ -2,7 +2,7 @@
 
 import Books from "@/components/Books";
 import { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function ViewBooks() {
@@ -14,9 +14,31 @@ export default function ViewBooks() {
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchOption, setSearchOption] = useState("name");
 
-  if (session && session.user?._doc?.role !== "researchers&students") {
-    redirect("/profile");
-  }
+  const router = useRouter();
+
+  if (session && session.user?._doc?.role === "librarian") redirect("/profile");
+
+  const handleEdit = (book) => {
+    router.push(`/update-book?id=${book._id}`);
+  };
+
+  const handleDelete = async (book) => {
+    const hasConfirmed = confirm("Are you sure you want to delete this Book?");
+
+    if (hasConfirmed) {
+      try {
+        await fetch(`/api/book/${book._id.toString()}`, {
+          method: "DELETE",
+        });
+
+        const filteredBooks = books.filter((item) => item._id !== book._id);
+
+        setBooks(filteredBooks);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -104,7 +126,13 @@ export default function ViewBooks() {
         {searchText ? (
           <>
             {searchedResults.length > 0 ? (
-              <Books books={searchedResults} />
+              <Books
+                books={searchedResults}
+                handleDelete={
+                  session.user?._doc?.role === "Admin" && handleDelete
+                }
+                handleEdit={session.user?._doc?.role === "Admin" && handleEdit}
+              />
             ) : (
               <div className="flex flex-col items-center my-[62px]">
                 <p className="text-gray-500 text-2xl font-bold">
@@ -117,7 +145,11 @@ export default function ViewBooks() {
             )}
           </>
         ) : (
-          <Books books={books} />
+          <Books
+            books={books}
+            handleDelete={session?.user?._doc?.role === "Admin" && handleDelete}
+            handleEdit={session?.user?._doc?.role === "Admin" && handleEdit}
+          />
         )}
       </div>
     </section>

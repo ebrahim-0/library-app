@@ -10,11 +10,15 @@ const MyProfile = () => {
   const { data: session, status } = useSession();
   const [books, setBooks] = useState([]);
 
-  if (status !== "authenticated") redirect("/login");
-  if (session && session.user?._doc?.role !== "librarian") redirect("/books");
+  if (status && status === "unauthenticated") redirect("/login");
 
-  const handleEdit = (post) => {
-    router.push(`/update-book?id=${post._id}`);
+  if (session && session.user?._doc?.role === "researchers&students")
+    redirect("/search");
+
+  console.log(status);
+
+  const handleEdit = (book) => {
+    router.push(`/update-book?id=${book._id}`);
   };
 
   const handleDelete = async (book) => {
@@ -37,7 +41,11 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const res = await fetch(`/api/users/${session?.user?.sub}/books`);
+      const res =
+        session?.user?._doc?.role === "Admin"
+          ? await fetch("/api/book")
+          : await fetch(`/api/users/${session?.user?.sub}/books`);
+
       const data = await res.json();
       setBooks(data);
     };
@@ -51,6 +59,11 @@ const MyProfile = () => {
       books={books}
       handleDelete={handleDelete}
       handleEdit={handleEdit}
+      des={
+        session?.user?._doc?.role === "Admin"
+          ? "Admin Have access for all users Books and can edit and delete them"
+          : ""
+      }
     />
   );
 };

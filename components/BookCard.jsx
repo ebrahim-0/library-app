@@ -59,7 +59,8 @@ export default function BookCard({ book, handleEdit, handleDelete }) {
         )}
       </div>
 
-      {session?.user?.sub === book?.creator?._id && pathName === "/profile" && (
+      {(session?.user?.sub === book?.creator?._id && pathName === "/profile") ||
+      session?.user?._doc?.role === "Admin" ? (
         <div className="mt-5 flex justify-center items-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent text-sm cursor-pointer"
@@ -74,7 +75,7 @@ export default function BookCard({ book, handleEdit, handleDelete }) {
             Delete
           </p>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

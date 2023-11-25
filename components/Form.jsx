@@ -18,7 +18,8 @@ export default function Form({
 
   if (status !== "authenticated") redirect("/login");
 
-  if (session && session.user?._doc?.role !== "librarian") redirect("/books");
+  if (session && session.user?._doc?.role === "researchers&students")
+    redirect("/search");
 
   return (
     <div className="w-full md:max-w-3xl p-8 my-16 bg-white border border-gray-200 rounded-lg shadow mx-auto">

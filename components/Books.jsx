@@ -6,7 +6,7 @@ const BookCardList = ({ books, handleDelete, handleEdit }) => {
       {books.map((book) => (
         <BookCard
           book={book}
-          key={Math.round(book._id * Math.random() * 1000)}
+          key={book._id}
           handleDelete={() => handleDelete && handleDelete(book)}
           handleEdit={() => handleEdit && handleEdit(book)}
         />

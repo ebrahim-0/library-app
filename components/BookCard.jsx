@@ -18,21 +18,21 @@ export default function BookCard({ book, handleEdit, handleDelete }) {
       />
       <div className="flex flex-col justify-between h-full mt-4 text-left">
         <h3 className="text-lg font-bold text-center">{book.name}</h3>
-        <p className="text-gray-500 mt-2">
+        <div className="text-gray-500 mt-2">
           <span className="text-gray-700 font-bold">Author:</span> {book.author}
-        </p>
-        <p className="text-gray-500 mt-2">
+        </div>
+        <div className="text-gray-500 mt-2">
           <span className="text-gray-700 font-bold">Publication Date:</span>{" "}
           {book.dateOfPublication}
-        </p>
-        <p className="text-gray-700 mt-2">
+        </div>
+        <div className="text-gray-700 mt-2">
           <span className="text-gray-700 font-bold">Category:</span>{" "}
           {book.category}
-        </p>
-        <p className="text-gray-700 mt-2">
+        </div>
+        <div className="text-gray-700 mt-2">
           <span className="text-gray-700 font-bold">Description:</span>{" "}
           {book.description}
-        </p>
+        </div>
         {pathName !== "/profile" && (
           <>
             {status === "authenticated" ? (
@@ -62,18 +62,18 @@ export default function BookCard({ book, handleEdit, handleDelete }) {
       {(session?.user?.sub === book?.creator?._id && pathName === "/profile") ||
       session?.user?._doc?.role === "Admin" ? (
         <div className="mt-5 flex justify-center items-center gap-4 border-t border-gray-100 pt-3">
-          <p
+          <div
             className="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent text-sm cursor-pointer"
             onClick={handleEdit}
           >
             Update
-          </p>
-          <p
+          </div>
+          <div
             className="font-medium text-sm bg-gradient-to-r from-red-500 to-rose-600 bg-clip-text text-transparent cursor-pointer"
             onClick={handleDelete}
           >
             Delete
-          </p>
+          </div>
         </div>
       ) : null}
     </div>

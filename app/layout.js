@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Library App",
   description: "library app for downloading books",
-  icons: "/icon.png",
+  icons: "/library.png",
 };
 
 export default function RootLayout({ children }) {

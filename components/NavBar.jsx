@@ -14,7 +14,7 @@ export default function NavBar() {
       <div>
         <Link href="/" className={"text-white text-xl font-medium"}>
           <img
-            src="/logo.png"
+            src="/logo2.png"
             alt="logo"
             className="h-[60px] w-full inline-block mr-2"
           />

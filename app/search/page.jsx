@@ -96,7 +96,7 @@ export default function ViewBooks() {
               }
             }}
             max={new Date().toISOString().split("T")[0]}
-            className="w-full placeholder:text-black py-2.5 font-satoshi pl-5 pr-5 text-sm focus:border-transparent focus:outline-none focus:ring-0 border-none"
+            className="w-full placeholder:text-black py-2.5 font-satoshi pl-5 pr-5 text-sm focus:outline-none focus:ring-0 border-none"
             required
             value={searchText}
             onChange={handleSearchChange}
@@ -135,12 +135,12 @@ export default function ViewBooks() {
               />
             ) : (
               <div className="flex flex-col items-center my-[62px]">
-                <p className="text-gray-500 text-2xl font-bold">
+                <div className="text-gray-500 text-2xl font-bold">
                   Oops! No Books Found.
-                </p>
-                <p className="text-gray-500 mt-2">
+                </div>
+                <div className="text-gray-500 mt-2">
                   Please try searching another keyword.
-                </p>
+                </div>
               </div>
             )}
           </>

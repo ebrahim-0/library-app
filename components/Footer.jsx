@@ -5,9 +5,11 @@ export default function Footer() {
     <footer className="p-4 bg-[#007bb6] shadow md:px-6 md:py-8">
       <div className="sm:flex sm:items-center sm:justify-between">
         <Link href="" className="flex items-center mb-4 sm:mb-0">
-          <span className="self-center text-xl font-semibold text-white">
-            Information Technology and Computing
-          </span>
+          <img
+            src="/logo.png"
+            alt="logo"
+            className="h-[60px] inline-block mr-2"
+          />
         </Link>
         <ul className="flex flex-wrap items-center mb-6 sm:mb-0">
           <li>

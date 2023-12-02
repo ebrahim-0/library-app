@@ -48,13 +48,8 @@ export default function ViewBooks() {
     })();
   }, []);
 
-  const handleOptionChange = (e) => {
-    setSearchOption(e.target.value);
-  };
-
   const filterBooks = (searchText) => {
     const regex = new RegExp(searchText, "i");
-
     return books.filter((book) => regex.test(book[searchOption]));
   };
 
@@ -105,7 +100,7 @@ export default function ViewBooks() {
 
           <select
             value={searchOption}
-            onChange={handleOptionChange}
+            onChange={(e) => setSearchOption(e.target.value)}
             className="w-1/5 p-0 py-2.5 text-black font-satoshi mr-3 text-sm focus:outline-none focus:ring-0 border-none"
           >
             <option className="py-2" value="name">

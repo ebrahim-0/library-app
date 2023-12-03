@@ -74,8 +74,6 @@ export default function UpdateBook() {
     }
   };
 
-  console.log(book);
-
   return (
     <Form
       type={"Update"}

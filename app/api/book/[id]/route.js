@@ -13,7 +13,7 @@ export const GET = async (request, { params }) => {
 
     return NextResponse.json(book, { status: 200 });
   } catch (error) {
-    return new Response("Failed To Fetch All Prompts", { status: 500 });
+    return new Response("Failed To Fetch All Books", { status: 500 });
   }
 };
 
@@ -34,7 +34,7 @@ export const PATCH = async (request, { params }) => {
     await connectMongoDB();
     const existingBook = await Book.findById(params.id);
 
-    if (!existingBook) return new Response("Prompt not found", { status: 404 });
+    if (!existingBook) return new Response("Book not found", { status: 404 });
 
     existingBook.name = name;
     existingBook.imageBook = imageBook;
@@ -57,7 +57,7 @@ export const DELETE = async (request, { params }) => {
   try {
     await connectMongoDB();
 
-    // Find the prompt by ID and remove it
+    // Find the book by ID and remove it
     await Book.findByIdAndRemove(params.id);
 
     return NextResponse.json(

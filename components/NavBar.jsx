@@ -37,7 +37,7 @@ export default function NavBar() {
           }
         >
           Dashboard
-        </Link>{" "}
+        </Link>
         {session && session.user?._doc?.role !== "librarian" && (
           <Link
             href={"search"}
@@ -97,6 +97,8 @@ export default function NavBar() {
         )}
       </div>
 
+      {/*  mobile */}
+
       <div className="flex relative md:hidden">
         <Menu
           className="text-3xl text-white md:hidden"
@@ -121,31 +123,37 @@ export default function NavBar() {
             >
               Dashboard
             </Link>
-            <Link
-              href={"/search"}
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              Search
-            </Link>
-            <Link
-              href={session ? "/add-book" : "/login"}
-              className="dropdown_link"
-              onClick={() => setToggleDropdown(false)}
-            >
-              Add Book
-            </Link>
-            {session && (
+            {session && session.user?._doc?.role !== "librarian" && (
               <Link
-                href={"/profile"}
+                href={"/search"}
                 className="dropdown_link"
                 onClick={() => setToggleDropdown(false)}
               >
-                <span>Welcome, </span>
-                <span className="font-semibold capitalize">
-                  {session.user.name}
-                </span>
+                Search
               </Link>
+            )}
+            {session && session.user?._doc?.role !== "researchers&students" && (
+              <>
+                <Link
+                  href={session ? "/add-book" : "/login"}
+                  className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  Add Book
+                </Link>
+                {session && (
+                  <Link
+                    href={"/profile"}
+                    className="dropdown_link"
+                    onClick={() => setToggleDropdown(false)}
+                  >
+                    <span>Welcome, </span>
+                    <span className="font-semibold capitalize">
+                      {session.user.name}
+                    </span>
+                  </Link>
+                )}
+              </>
             )}
             {session && (
               <button

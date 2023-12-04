@@ -13,7 +13,10 @@ export const GET = async (request, { params }) => {
 
     return NextResponse.json(book, { status: 200 });
   } catch (error) {
-    return new Response("Failed To Fetch All Books", { status: 500 });
+    return NextResponse.json(
+      { message: "Failed to fetch book" },
+      { status: 500 },
+    );
   }
 };
 

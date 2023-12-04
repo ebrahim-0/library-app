@@ -37,7 +37,10 @@ export const PATCH = async (request, { params }) => {
     await connectMongoDB();
     const existingBook = await Book.findById(params.id);
 
-    if (!existingBook) return new Response("Book not found", { status: 404 });
+    if (!existingBook)
+      return new Response(JSON.stringify({ message: "Book not found" }), {
+        status: 404,
+      });
 
     if (name !== existingBook.name) {
       const existingBookName = await Book.findOne({ name });

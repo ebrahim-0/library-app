@@ -8,7 +8,7 @@ export const ourFileRouter = {
       console.log("file url", file.url);
     },
   ),
-  pdfUploader: f({ pdf: { maxFileSize: "8MB" } }).onUploadComplete(
+  pdfUploader: f({ pdf: { maxFileSize: "50MB" } }).onUploadComplete(
     async ({ file }) => {
       console.log("file url", file.url);
     },

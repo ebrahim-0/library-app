@@ -10,6 +10,9 @@ export async function POST(req) {
     console.log("user: ", user);
     return NextResponse.json({ user });
   } catch (error) {
-    console.log(error);
+    return NextResponse.json(
+      { message: "An error occurred while registering the user." },
+      { status: 500 },
+    );
   }
 }

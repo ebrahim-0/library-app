@@ -67,7 +67,10 @@ export const PATCH = async (request, { params }) => {
       { status: 200 },
     );
   } catch (error) {
-    return new Response("Failed To Update Book", { status: 500 });
+    return NextResponse.json(
+      { message: "Failed to update book" },
+      { status: 500 },
+    );
   }
 };
 

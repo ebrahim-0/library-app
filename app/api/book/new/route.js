@@ -17,6 +17,15 @@ export const POST = async (req) => {
   try {
     await connectMongoDB();
 
+    const existingBook = await Book.findOne({ name });
+
+    if (existingBook) {
+      return NextResponse.json(
+        { message: "Book already exists." },
+        { status: 409 },
+      );
+    }
+
     await Book.create({
       creator: userId,
       name,

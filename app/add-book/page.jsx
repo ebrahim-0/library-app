@@ -56,6 +56,8 @@ export default function AddBook() {
           }),
         });
 
+        const data = await response.json();
+
         if (response.ok) {
           toast.success("Book Added Successfully", {
             position: toast.POSITION.TOP_RIGHT,
@@ -66,9 +68,19 @@ export default function AddBook() {
           }, 2000);
         } else {
           setSubmitting(false);
+
+          toast.error(data.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+
+          console.log("data", data);
         }
       } catch (error) {
-        console.log(error);
+        toast.error(error.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        console.log("error", error);
       }
     }
   };

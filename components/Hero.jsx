@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl font-bold gap-4 flex flex-col justify-center items-center">
         <span>Welcome</span>
         <span>To</span>
-        <span>Our Library</span>
+        <span>Library</span>
 
         <Link
           href={

@@ -36,6 +36,16 @@ export const PATCH = async (request, { params }) => {
 
     if (!existingBook) return new Response("Book not found", { status: 404 });
 
+    if (name !== existingBook.name) {
+      const existingBookName = await Book.findOne({ name });
+      if (existingBookName) {
+        return new Response(
+          JSON.stringify({ message: "Book with this name already exists" }),
+          { status: 409, headers: { "Content-Type": "application/json" } },
+        );
+      }
+    }
+
     existingBook.name = name;
     existingBook.imageBook = imageBook;
     existingBook.pdfBook = pdfBook;

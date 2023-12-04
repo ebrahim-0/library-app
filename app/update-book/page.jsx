@@ -42,10 +42,10 @@ export default function UpdateBook() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
 
     if (!bookId) return alert("Book ID not found");
 
+    setSubmitting(true);
     try {
       const response = await fetch(`/api/book/${bookId}`, {
         method: "PATCH",
@@ -60,6 +60,8 @@ export default function UpdateBook() {
         }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         toast.success("Book Updated Successfully", {
           position: toast.POSITION.TOP_RIGHT,
@@ -68,9 +70,16 @@ export default function UpdateBook() {
         setTimeout(() => {
           router.push("/search");
         }, 2000);
+      } else {
+        toast.error(data.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setSubmitting(false);
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
   };
 

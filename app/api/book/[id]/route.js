@@ -41,7 +41,7 @@ export const PATCH = async (request, { params }) => {
       if (existingBookName) {
         return new Response(
           JSON.stringify({ message: "Book with this name already exists" }),
-          { status: 409, headers: { "Content-Type": "application/json" } },
+          { status: 409 },
         );
       }
     }

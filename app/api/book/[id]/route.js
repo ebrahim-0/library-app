@@ -46,17 +46,20 @@ export const PATCH = async (request, { params }) => {
       }
     }
 
-    existingBook.name = name;
-    existingBook.imageBook = imageBook;
-    existingBook.pdfBook = pdfBook;
-    existingBook.description = description;
-    existingBook.author = author;
-    existingBook.dateOfPublication = dateOfPublication;
-    existingBook.category = category;
+    const update = await Book.findByIdAndUpdate(params.id, {
+      name,
+      imageBook,
+      pdfBook,
+      description,
+      author,
+      dateOfPublication,
+      category,
+    });
 
-    await existingBook.save();
-
-    return new Response(JSON.stringify(existingBook), { status: 200 });
+    return NextResponse.json(
+      { update, message: "Book updated" },
+      { status: 200 },
+    );
   } catch (error) {
     return new Response("Failed To Update Book", { status: 500 });
   }
